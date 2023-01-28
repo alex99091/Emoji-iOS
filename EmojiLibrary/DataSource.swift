@@ -33,4 +33,38 @@ class DataSource: NSObject, UICollectionViewDataSource {
         
         return emojiCell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        guard let emojiHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EmojiHeaderView.reuseIdentifier, for: indexPath) as? EmojiHeaderView else {
+            fatalError("Cannot create EmojiHeaderView")
+        }
+        
+        let category = emoji.sections[indexPath.section]
+        emojiHeaderView.textLabel.text = category.rawValue
+        
+        return emojiHeaderView
+    }
+}
+
+extension DataSource {
+    func addEmoji(_ emoji: String, to category: Emoji.Category) {
+        guard var emojiData = self.emoji.data[category] else { return }
+        emojiData.append(emoji)
+        self.emoji.data.updateValue(emojiData, forKey: category)
+    }
+    
+    func deleteEmoji(at indexPath: IndexPath) {
+        let category = emoji.sections[indexPath.section]
+        guard var emojiData = emoji.data[category] else { return }
+        emojiData.remove(at: indexPath.item)
+        
+        emoji.data.updateValue(emojiData, forKey: category)
+    }
+    
+    func deleteEmoji(at indexPaths: [IndexPath]) {
+        for path in indexPaths {
+            deleteEmoji(at: path)
+        }
+    }
 }

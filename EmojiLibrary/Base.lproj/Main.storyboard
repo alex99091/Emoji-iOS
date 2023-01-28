@@ -49,12 +49,31 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="emojiLabel" destination="upT-hD-SfM" id="7F0-MB-WbV"/>
+                                            <segue destination="vtd-fA-ZDq" kind="show" identifier="showEmojiDetail" id="qz3-f6-lmS"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mm5-fn-lEQ">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EmojiHeaderView" id="mm5-fn-lEQ" customClass="EmojiHeaderView" customModule="EmojiLibrary" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1D-73-rlt">
+                                            <rect key="frame" x="7" y="14.5" width="399" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="O1D-73-rlt" secondAttribute="trailing" constant="8" id="1cD-NS-N9J"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="O1D-73-rlt" secondAttribute="trailing" constant="3567" id="Dhl-Pj-9jw"/>
+                                        <constraint firstItem="O1D-73-rlt" firstAttribute="centerY" secondItem="mm5-fn-lEQ" secondAttribute="centerY" id="YLA-nv-Vr3"/>
+                                        <constraint firstItem="O1D-73-rlt" firstAttribute="leading" secondItem="mm5-fn-lEQ" secondAttribute="leading" constant="7" id="cWB-8n-ucJ"/>
+                                        <constraint firstItem="O1D-73-rlt" firstAttribute="leading" secondItem="mm5-fn-lEQ" secondAttribute="leadingMargin" constant="6" id="mus-9b-50y"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="textLabel" destination="O1D-73-rlt" id="Rct-au-CTP"/>
+                                    </connections>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
@@ -67,14 +86,60 @@
                             <constraint firstItem="cjk-Gg-1ya" firstAttribute="leading" secondItem="azJ-2U-Xza" secondAttribute="leading" id="kJK-Wm-EVX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="aTw-zo-kg1"/>
+                    <navigationItem key="navigationItem" id="aTw-zo-kg1">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="2IF-C9-pwN">
+                                <connections>
+                                    <action selector="addEmoji:" destination="5dy-S2-DCj" id="LZh-a3-A7b"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem enabled="NO" systemItem="trash" id="mJ7-fz-6Wc">
+                                <connections>
+                                    <action selector="deleteEmoji:" destination="5dy-S2-DCj" id="hgj-Zi-htF"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addButton" destination="2IF-C9-pwN" id="ENs-cl-EMT"/>
                         <outlet property="collectionView" destination="cjk-Gg-1ya" id="BJo-LH-PWW"/>
+                        <outlet property="deleteButton" destination="mJ7-fz-6Wc" id="9yx-GU-kAv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuw-VP-I4u" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="767" y="108"/>
+        </scene>
+        <!--Emoji Detail Controller-->
+        <scene sceneID="pxe-xe-cws">
+            <objects>
+                <viewController id="vtd-fA-ZDq" customClass="EmojiDetailController" customModule="EmojiLibrary" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="s3c-vj-rhO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="😆" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O55-rW-8Uh">
+                                <rect key="frame" x="164" y="400.5" width="86" height="95.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eF8-Wb-xGv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="O55-rW-8Uh" firstAttribute="centerY" secondItem="s3c-vj-rhO" secondAttribute="centerY" id="bwR-uT-fun"/>
+                            <constraint firstItem="O55-rW-8Uh" firstAttribute="centerX" secondItem="s3c-vj-rhO" secondAttribute="centerX" id="lyO-zS-wsW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="UgV-O7-jGb"/>
+                    <connections>
+                        <outlet property="textLabel" destination="O55-rW-8Uh" id="6ow-4j-5QG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pt4-Vj-lgE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1545" y="108"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tF0-qV-kgp">
@@ -92,7 +157,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fdn-3F-Dkf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146.37681159420291" y="107.8125"/>
+            <point key="canvasLocation" x="39" y="108"/>
         </scene>
     </scenes>
     <resources>
